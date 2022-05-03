@@ -65,7 +65,7 @@ class BasicSshHoneypot(paramiko.ServerInterface):
 
         global local_ip_address, local_port, local_username, local_password
         # Filters accepted passwords for login in the Protected Network
-        passwords = list(open("users.txt"))
+        passwords = list(open("passwords.txt"))
         for i in range(len(passwords)):
             passwords[i] = passwords[i].strip("\n")
 

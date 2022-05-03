@@ -30,7 +30,7 @@ Note: Windows and Mac where not tested
 
 Note: The steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
 
-**IMPORTANT: Change the IP addresses inside the BasicsshHoneypot class to conform to your systems to be connected and the "users.txt" which contains the necessary passwords for login**
+**IMPORTANT: Change the IP addresses inside the BasicsshHoneypot class to conform to your systems to be connected and the "passwords.txt" which contains the necessary passwords for login**
 
 1. `git clone https://github.com/r0m5s/SSH_Honeypot`                              #Clones the git repo
 2. `cd SSH_Honeypot`                                                              #Moves to the software directory
