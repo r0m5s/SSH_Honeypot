@@ -1,7 +1,7 @@
 lab:
   description: ''
   notes: ''
-  timestamp: 1651156712.8902433
+  timestamp: 1651612036.0520144
   title: Virtual_Honeypot
   version: 0.0.4
 nodes:
@@ -502,6 +502,7 @@ nodes:
       #Log connections from port 22
       iptables -I INPUT -p tcp --dport 22 -m state --state NEW -j LOG --log-level 1 --log-prefix "New Connection >> "
 
+      #Change default routes
       ip route del default
       ip route add default via 192.168.1.1 dev eth1 metric 1
       ip route add default via 192.168.0.1 dev eth0 metric 2
@@ -601,9 +602,9 @@ nodes:
     configuration: |-
       Building configuration...
 
-      Current configuration : 3318 bytes
+      Current configuration : 3464 bytes
       !
-      ! Last configuration change at 18:27:35 UTC Thu Apr 28 2022
+      ! Last configuration change at 22:29:52 UTC Tue May 3 2022
       !
       version 15.9
       service timestamps debug datetime msec
@@ -688,6 +689,7 @@ nodes:
       !
       interface GigabitEthernet0/2
        ip address 10.0.0.1 255.255.255.0
+       ip access-group DENY_TRAFFIC in
        duplex auto
        speed auto
        media-type rj45
@@ -705,13 +707,17 @@ nodes:
       no ip http server
       no ip http secure-server
       !
+      ip access-list extended DENY_TRAFFIC
+       permit ip any host 192.168.1.2
+       permit ip 0.0.0.0 255.255.255.0 any
+      !
       ipv6 ioam timestamp
       !
       !
       !
       control-plane
       !
-      banner exec ^CC
+      banner exec ^CCCC
       **************************************************************************
       * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
       * education. IOSv is provided as-is and is not supported by Cisco's      *
@@ -720,7 +726,7 @@ nodes:
       * purposes is expressly prohibited except as otherwise authorized by     *
       * Cisco in writing.                                                      *
       **************************************************************************^C
-      banner incoming ^CC
+      banner incoming ^CCCC
       **************************************************************************
       * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
       * education. IOSv is provided as-is and is not supported by Cisco's      *
@@ -729,7 +735,7 @@ nodes:
       * purposes is expressly prohibited except as otherwise authorized by     *
       * Cisco in writing.                                                      *
       **************************************************************************^C
-      banner login ^CC
+      banner login ^CCCC
       **************************************************************************
       * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
       * education. IOSv is provided as-is and is not supported by Cisco's      *
@@ -774,8 +780,8 @@ nodes:
   - id: n6
     label: Protected-Client
     node_definition: desktop
-    x: 100
-    y: 150
+    x: 250
+    y: 300
     configuration: |-
       # this is a shell script which will be sourced at boot
       hostname inserthostname_here
@@ -825,7 +831,7 @@ links:
     n1: n2
     i2: i0
     n2: n6
-  - id: l8
+  - id: l2
     i1: i3
     n1: n2
     i2: i0

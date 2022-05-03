@@ -26,7 +26,8 @@ Disclaimer: Major part of the code used was inspired from the user sjbell from t
 
 Note: Windows and Mac where not tested
 
-# Steps to initiate the SSH Honeypot alone
+# Program Installation
+## Steps to initiate the SSH Honeypot alone
 
 Note: The steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
 
@@ -42,4 +43,12 @@ Note: The steps are only valid if the system already has the correct dependencie
 
 6. `iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222`   #Forwards the port from 2222 to 22 (to avoid using the honeypot on the root user) 
 
-# Steps to Install the Honeypot with CML Network
+## Steps to Install the Honeypot with CML Network
+
+1. Download and install VMWare Workstation
+2. Download the virtual machine containing the CML software and activate the software according to Cisco's instructions (The step to step installation of CML is out of the scope of these instructions)
+3. Add a bridge interface called "bridge0" (or afterwards change the external connection to the respective interface name)
+4. Open a browser (Chrome, Firefox, Brave, etc.)
+5. Enter the IP address configured for the GUI of CML
+6. Import the .yaml file from the folder to the CML Lab
+7. Run the simulation
