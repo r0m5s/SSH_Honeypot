@@ -2,8 +2,9 @@
 This project is a python built SSH Honeypot which proxies the SSH connection depending on the credentials used on the log in prompt.
 
 ## Software Requirements
-- VMWare Workstation >16 (Paid License)
-- Cisco Modelling Labs 2.X (Paid License)
+- VMWare Workstation >16 (Paid License) (or any Virtual Machine software such as VirtualBox, KVM, Windows Hypervisor)
+- Cisco Modelling Labs 2.X (Paid License) (Optional)
+- Python 3.X
 
 ## Additional Python Libraries
 - paramiko
@@ -18,6 +19,7 @@ This project is a python built SSH Honeypot which proxies the SSH connection dep
 
 # Build Dependencies
 `pip install --upgrade pip`
+
 `pip install --upgrade -r paramiko`
 
 Note: Windows and Mac where not tested
@@ -35,6 +37,7 @@ Note: The steps are only valid if the system already has the correct dependencie
 5. `./ssh_honeypot`                                                               #Initiates the SSH Honeypot in port 2222 by default and locally 
 
 **Optional**
+
 6. `iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222`   #Forwards the port from 2222 to 22 (to avoid using the honeypot on the root user) 
 
 # Steps to Install the Honeypot with CML Network
