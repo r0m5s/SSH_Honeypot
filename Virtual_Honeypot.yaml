@@ -1,0 +1,832 @@
+lab:
+  description: ''
+  notes: ''
+  timestamp: 1651156712.8902433
+  title: Virtual_Honeypot
+  version: 0.0.4
+nodes:
+  - id: n0
+    label: H-R1
+    node_definition: iosv
+    x: -300
+    y: 300
+    configuration: |-
+      Building configuration...
+
+      Current configuration : 3482 bytes
+      !
+      ! Last configuration change at 18:27:15 UTC Thu Apr 28 2022
+      !
+      version 15.9
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname H-R1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 192.168.0.1 255.255.255.252
+       ip nat outside
+       ip virtual-reassembly in
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 192.168.1.1 255.255.255.0
+       ip nat inside
+       ip virtual-reassembly in
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/2
+       ip address dhcp
+       ip nat outside
+       ip virtual-reassembly in
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      router ospf 1
+       network 192.168.1.0 0.0.0.255 area 0
+       default-information originate
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip nat inside source list 1 interface GigabitEthernet0/0 overload
+      ip nat inside source static tcp 192.168.1.3 22 192.168.0.1 22 extendable
+      !
+      logging trap debugging
+      logging facility local6
+      logging host 192.168.1.69
+      ipv6 ioam timestamp
+      !
+      !
+      access-list 1 permit 0.0.0.0 255.255.255.0
+      !
+      control-plane
+      !
+      banner exec ^CCCCCCCCCCCC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner incoming ^CCCCCCCCCCCC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner login ^CCCCCCCCCCCC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       login
+       transport input none
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-159-3-m3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n1
+    label: H-S1
+    node_definition: iosvl2
+    x: -450
+    y: 300
+    configuration: |-
+      Building configuration...
+
+      Current configuration : 2871 bytes
+      !
+      ! Last configuration change at 18:26:49 UTC Thu Apr 28 2022
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname H-S1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      no logging console
+      !
+      no aaa new-model
+      no process cpu extended history
+      no process cpu autoprofile hog
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      no cdp run
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       negotiation auto
+       no cdp tlv app
+      !
+      interface GigabitEthernet0/1
+       negotiation auto
+       no cdp tlv app
+      !
+      interface GigabitEthernet0/2
+       negotiation auto
+       no cdp tlv app
+      !
+      interface GigabitEthernet0/3
+       negotiation auto
+       no cdp tlv app
+      !
+      ip forward-protocol nd
+      !
+      ip http server
+      ip http secure-server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      !
+      no service-routing capabilities-manager
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec ^CCCCCCCCCCCC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner incoming ^CCCCCCCCCCCC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      banner login ^CCCCCCCCCCCC
+      IOSv - Cisco Systems Confidential -
+
+      Supplemental End User License Restrictions
+
+      This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+      By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+      ^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       login
+      !
+      !
+      end
+    image_definition: iosvl2-2020
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n4
+    label: client
+    node_definition: alpine
+    x: -700
+    y: 300
+    configuration: |-
+      # configurable user account
+      USERNAME=client
+      PASSWORD=client
+      hostname client
+
+      # this is a shell script which will be sourced at boot
+      HONEYIP=192.168.1.3
+      DEFAULT_GATEWAY_IP=192.168.1.1
+
+      #Networking Configuration
+      cat > /etc/network/interfaces <<EOF
+      auto lo
+      iface lo inet loopback
+
+      auto eth0
+      iface eth0 inet static
+              address $HONEYIP/24
+              gateway $DEFAULT_GATEWAY_IP
+      EOF
+
+      cat > /etc/resolv.conf <<EOF
+      nameserver 1.1.1.1
+      nameserver 1.0.0.1
+      EOF
+
+      service networking restart
+
+      ##############
+      #Update Repos#
+      ##############
+      cat > /etc/apk/repositories <<EOF
+      http://dl-cdn.alpinelinux.org/alpine/edge/main
+      http://dl-cdn.alpinelinux.org/alpine/edge/community
+      EOF
+
+      apk update
+
+      # Log Command Line
+      apk add audit
+
+      # Log shell commands run by users
+      cat > /etc/audit/rules.d/log_commands <<EOF
+      -a exit,always -F arch=b64 -F euid=0 -S execve
+      -a exit,always -F arch=b32 -F euid=0 -S execve
+      EOF
+      service auditd start
+
+      #Installation of bash command line
+      apk add bash
+
+      cat > /etc/environment <<EOF
+      PROMPT_COMMAND='echo "$(whoami) $(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> /var/log/command_line/bash-history-$(date "+%Y-%m-%d").log'
+      EOF
+
+      mkdir -p /var/files
+      cat > /etc/profile <<EOF
+      wget_malware ()
+      {
+          wget "$1";
+          if [[ "$@" == *"http"* ]]; then
+              malware_file=$(ls -t | head -n1);
+              mkdir -p /var/files;
+              cp $malware_file /var/files/$malware_file
+          fi
+      }
+
+      curl_malware ()
+      {
+          curl "$1";
+          if [[ "$@" == *"http"* ]]; then
+              malware_file=$(ls -t | head -n1);
+              mkdir -p /var/files;
+              cp $malware_file /var/files/$malware_file
+          fi
+      }
+
+      alias wget=wget_malware
+      alias curl=curl_malware
+      EOF
+
+      chmod 644 /etc/profile
+      sed -i 's/ash/bash/g' /etc/passwd
+
+      # Aditional Security Measures
+      echo "$USERNAME ALL=(ALL) ALL" >> /etc/sudoers
+
+      # Disable Root account on SSH login
+      echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+    image_definition: alpine-3-13-2-base
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: eth0
+        type: physical
+  - id: n7
+    label: honeypot
+    node_definition: alpine
+    x: -150
+    y: 300
+    configuration: |-
+      # configurable user account
+      USERNAME=honey
+      PASSWORD=honey
+      hostname honeypot_server
+
+      # this is a shell script which will be sourced at boot
+      HONEYNET_IP=192.168.0.2
+      HONEYNET_GATEWAY_IP=192.168.0.1
+      SSH_CLIENT=192.168.0.1
+
+      EXTERNAL_NET_IP=192.168.1.2
+      EXTERNAL_GATEWAY=192.168.1.1
+
+      #Networking Configuration
+      cat > /etc/network/interfaces <<EOF
+      auto lo
+      iface lo inet loopback
+
+      auto eth0
+      iface eth0 inet static
+              address $HONEYNET_IP/30
+              gateway $HONEYNET_GATEWAY_IP
+
+      auto eth1
+      iface eth1 inet static
+              address $EXTERNAL_NET_IP/24
+              gateway $EXTERNAL_GATEWAY
+      EOF
+
+      cat > /etc/resolv.conf <<EOF
+      nameserver 1.1.1.1
+      nameserver 1.0.0.1
+      EOF
+
+      service networking restart
+
+      ##############
+      #Update Repos#
+      ##############
+      cat > /etc/apk/repositories <<EOF
+      http://dl-cdn.alpinelinux.org/alpine/edge/main
+      http://dl-cdn.alpinelinux.org/alpine/edge/community
+      EOF
+
+      apk update
+
+      #Iptables installation
+      apk add iptables
+
+      #Transparent Proxy configuration
+      service sshd stop
+      echo 1 > /proc/sys/net/ipv4/ip_forward
+      iptables -t nat -A PREROUTING -p tcp --dport 22 -j DNAT --to-destination $SSH_CLIENT:22
+      iptables -t nat -A POSTROUTING -p tcp -d $SSH_CLIENT --dport 22 -j SNAT --to-source $HONEYIP
+
+      #Log connections from port 22
+      iptables -I INPUT -p tcp --dport 22 -m state --state NEW -j LOG --log-level 1 --log-prefix "New Connection >> "
+
+      ip route del default
+      ip route add default via 192.168.1.1 dev eth1 metric 1
+      ip route add default via 192.168.0.1 dev eth0 metric 2
+    image_definition: alpine-3-13-2-base
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: eth0
+        type: physical
+      - id: i1
+        slot: 1
+        label: eth1
+        type: physical
+  - id: n11
+    label: Hacker
+    node_definition: external_connector
+    x: 100
+    y: 450
+    configuration: bridge2
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: port
+        type: physical
+  - id: n3
+    label: Syslog
+    node_definition: alpine
+    x: -450
+    y: 100
+    configuration: |-
+      # configurable user account
+      USERNAME=log
+      PASSWORD=log
+
+      # this is a shell script which will be sourced at boot
+      hostname syslog
+      HONEYIP=192.168.1.69
+      DEFAULT_GATEWAY_IP=192.168.1.1
+
+      #Networking Configuration
+      cat > /etc/network/interfaces <<EOF
+      auto lo
+      iface lo inet loopback
+
+      auto eth0
+      iface eth0 inet static
+              address $HONEYIP/24
+              gateway $DEFAULT_GATEWAY_IP
+      EOF
+
+      cat > /etc/resolv.conf <<EOF
+      nameserver 1.1.1.1
+      nameserver 1.0.0.1
+      EOF
+
+      service networking restart
+
+      ##############
+      #Update Repos#
+      ##############
+      cat > /etc/apk/repositories <<EOF
+      http://dl-cdn.alpinelinux.org/alpine/edge/main
+      http://dl-cdn.alpinelinux.org/alpine/edge/community
+      EOF
+
+      apk update
+
+      #install and enable rsyslog
+      apk add rsyslog
+      service rsyslog start
+    image_definition: alpine-3-13-2-base
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: eth0
+        type: physical
+  - id: n5
+    label: Honeypot-WAN
+    node_definition: external_connector
+    x: -300
+    y: 450
+    configuration: bridge0
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: port
+        type: physical
+  - id: n2
+    label: T-R1
+    node_definition: iosv
+    x: 100
+    y: 300
+    configuration: |-
+      Building configuration...
+
+      Current configuration : 3318 bytes
+      !
+      ! Last configuration change at 18:27:35 UTC Thu Apr 28 2022
+      !
+      version 15.9
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname T-R1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      no logging console
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip dhcp excluded-address 192.168.2.1
+      ip dhcp excluded-address 10.0.0.1
+      !
+      ip dhcp pool INTERNAL_NETWORK
+       network 192.168.2.0 255.255.255.0
+       default-router 192.168.2.1
+       dns-server 1.1.1.1 1.0.0.1
+      !
+      ip dhcp pool EXTERNAL_NETWORK
+       network 10.0.0.0 255.255.255.0
+       default-router 10.0.0.1
+       dns-server 1.1.1.1 1.0.0.1
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 192.168.1.1 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 192.168.2.1 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/2
+       ip address 10.0.0.1 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner incoming ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      banner login ^CC
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************^C
+      !
+      line con 0
+       exec-timeout 0 0
+      line aux 0
+      line vty 0 4
+       login
+       transport input none
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-159-3-m3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n6
+    label: Protected-Client
+    node_definition: desktop
+    x: 100
+    y: 150
+    configuration: |-
+      # this is a shell script which will be sourced at boot
+      hostname inserthostname_here
+      # configurable user account
+      USERNAME=client
+      PASSWORD=client
+    image_definition: desktop-3-13-2-xfce
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: eth0
+        type: physical
+links:
+  - id: l1
+    i1: i2
+    n1: n0
+    i2: i1
+    n2: n1
+  - id: l4
+    i1: i0
+    n1: n4
+    i2: i4
+    n2: n1
+  - id: l0
+    i1: i0
+    n1: n7
+    i2: i1
+    n2: n0
+  - id: l3
+    i1: i3
+    n1: n1
+    i2: i0
+    n2: n3
+  - id: l5
+    i1: i0
+    n1: n5
+    i2: i3
+    n2: n0
+  - id: l6
+    i1: i1
+    n1: n2
+    i2: i1
+    n2: n7
+  - id: l7
+    i1: i2
+    n1: n2
+    i2: i0
+    n2: n6
+  - id: l8
+    i1: i3
+    n1: n2
+    i2: i0
+    n2: n11
