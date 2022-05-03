@@ -1,6 +1,8 @@
 # Honeypot Project
 This project is a python built SSH Honeypot which proxies the SSH connection depending on the credentials used on the log in prompt.
 
+Disclaimer: Major part of the code used was inspired from the user sjbell from the repository https://github.com/sjbell/basic_ssh_honeypot 
+
 ## Software Requirements
 - VMWare Workstation >16 (Paid License) (or any Virtual Machine software such as VirtualBox, KVM, Windows Hypervisor)
 - Cisco Modelling Labs 2.X (Paid License) (Optional)
