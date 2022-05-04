@@ -398,6 +398,7 @@ nodes:
       EOF
 
       mkdir -p /var/files
+      chown -R $USERNAME:$USERNAME /var/files
       cat > /etc/profile <<EOF
       wget_malware ()
       {

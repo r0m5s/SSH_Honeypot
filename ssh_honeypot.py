@@ -15,7 +15,7 @@ from paramiko.py3compat import b, u, decodebytes
 
 # Variables
 HOST_KEY = paramiko.RSAKey(filename='server.key')
-SSH_BANNER = "SSH-2.0-OpenSSH_7.7p1"
+SSH_BANNER = "SSH-2.0-OpenSSH_7.7"
 WELCOME_BANNER = "Welcome to Alpine Linux 23.03\r\n\r\n"
 
 # Iniates global varibles for future change according to the credentials

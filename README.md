@@ -40,9 +40,11 @@ Note: The steps are only valid if the system already has the correct dependencie
 5. `./ssh_honeypot`                                                               #Initiates the SSH Honeypot in port 2222 by default and locally 
 
 **Optional**
+Assigning the port 22 requires root privileges and is not recommended to run the program on the root account in order to avoid security issues in case the attacker is able to exploit the software. Therefore the following line of iptables is recommended to redirect the traffic on port 22 to the port 2222. 
 
-6. `iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222`   #Forwards the port from 2222 to 22 (to avoid using the honeypot on the root user) 
+6. `iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222`
 
+# Network Deployment
 ## Steps to Install the Honeypot with CML Network
 
 1. Download and install VMWare Workstation
