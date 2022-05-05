@@ -54,3 +54,5 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 5. Enter the IP address configured for the GUI of CML
 6. Import the .yaml file from the folder to the CML Lab
 7. Run the simulation
+
+Any additional scripts and configurations should be already configured in the booting script in Alpine Linux systems and downloaded directly from the current github page. Therefore, if the booting scripts are being used instead of a pre-configured KVM Linux image, the simulation needs to have proper NAT and bridge configurations for external internet connection.
