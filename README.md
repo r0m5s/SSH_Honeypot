@@ -21,12 +21,12 @@ Disclaimer: Major part of the code used was inspired from the user sjbell from t
 ### Debian Based
 `sudo apt install python3 python3-pip python3-paramiko`
 
+Note: Windows and Mac operating systems where not tested
+
 # Building Dependencies
 `pip3 install --upgrade pip`
 
 `pip3 install -r requirements.txt`
-
-Note: Windows and Mac where not tested
 
 # Program Installation
 ## Steps to initiate the SSH Honeypot Script
