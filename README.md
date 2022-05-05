@@ -19,9 +19,9 @@ Disclaimer: Major part of the code used was inspired from the user sjbell from t
 `sudo pacman -S python python-pip python-paramiko`
 
 ### Debian Based
-`sudo apt install python python-pip python-paramiko`
+`sudo apt install python3 python3-pip python3-paramiko`
 
-# Build Dependencies
+# Building Dependencies
 `pip3 install --upgrade pip`
 
 `pip3 install -r requirements.txt`
@@ -29,7 +29,7 @@ Disclaimer: Major part of the code used was inspired from the user sjbell from t
 Note: Windows and Mac where not tested
 
 # Program Installation
-## Steps to initiate the SSH Honeypot
+## Steps to initiate the SSH Honeypot Script
 
 Note: The steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
 
@@ -51,7 +51,7 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 ## Steps to Install the Honeypot with CML Network
 
 1. Download and install VMWare Workstation
-2. Download the virtual machine containing the CML software and activate the software according to Cisco's instructions (The step to step installation of CML is out of the scope of these instructions)
+2. Download the virtual machine containing the CML software and activate the software according to Cisco's instructions - https://www.cisco.com/c/en/us/td/docs/cloud_services/cisco_modeling_labs/v200/quick/start/b_cml_quick_start_2-0/m_deploy_and_configure.html (Step to step installation of CML is out of the scope of these instructions)
 3. Add a bridge interface called "bridge0" (or afterwards change the external connection to the respective interface name)
 4. Open a browser (Chrome, Firefox, Brave, etc.)
 5. Enter the IP address configured for the GUI of CML
