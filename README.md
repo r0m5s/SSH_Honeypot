@@ -1,4 +1,4 @@
-# Honeypot Project
+# Virtual Honeypot Project
 This project is a python built SSH Honeypot script built in python which proxies the SSH connection depending on the credentials used on the log in prompt to collect and log brute force attacks and other type of exploitation methods.
 
 To use the script as a virtual honeypot, the project includes a .yaml file with pre-configured scripts and configurations that can be imported and used with Cisco Modelling Labs software.
