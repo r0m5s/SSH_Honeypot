@@ -28,12 +28,18 @@ Note: Windows and Mac operating systems where not tested
 
 `pip3 install -r requirements.txt`
 
+# Important Files
+
+- passwords.txt - Contains passwords to redirect the system to a protected system
+- Virtual_Honeypot.yaml - CML network simulation with High Interaction Honeypot and configured for possible network expansion
+- Additional_Scripts/00-Malware_Collection_Script.sh - Malware Collection script to save downloaded files to local machine
+
 # Program Installation
 ## Steps to initiate the SSH Honeypot Script
 
-Note: The steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
+Note: The following steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
 
-**IMPORTANT: Change the IP addresses inside the BasicsshHoneypot class to conform to your systems to be connected and the "passwords.txt" which contains the necessary passwords for login**
+**IMPORTANT: Change the IP addresses, usernames, port number (if appropriate) and password in the main script (ssh_honeypot.py) from lines 76 to 79 and 87 to 90, in order to conform to your systems connected in the local network**
 
 1. `git clone https://github.com/r0m5s/SSH_Honeypot`                              #Clones the git repo
 2. `cd SSH_Honeypot`                                                              #Moves to the software directory
@@ -56,7 +62,8 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 4. Open a browser (Chrome, Firefox, Brave, etc.)
 5. Enter the IP address configured for the GUI of CML
 6. Import the .yaml file from the folder to the CML Lab
-7. Run the simulation
+7. Run the following commands in the mentioned systems: honeypot - `sudo chown -R honey:honey /home/honey/SSH_Honeypot`; client - `sudo chown -R client:client /var/files` 
+8. Run/Start the lab simulation
 
 Any additional scripts and configurations should be already configured in the booting script in Alpine Linux systems and downloaded directly from the current github page. Therefore, if the booting scripts are being used instead of a pre-configured KVM Linux image, the simulation needs to have proper NAT and bridge configurations for external internet connection.
 
