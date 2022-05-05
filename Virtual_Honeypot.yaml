@@ -481,6 +481,7 @@ nodes:
       ##############
       #Update Repos#
       ##############
+
       cat > /etc/apk/repositories <<EOF
       http://dl-cdn.alpinelinux.org/alpine/edge/main
       http://dl-cdn.alpinelinux.org/alpine/edge/community
@@ -488,19 +489,11 @@ nodes:
 
       apk update
 
-      #Iptables installation
-      apk add iptables
+      ###############################
+      #Install SSH Honeypot Software#
+      ###############################
 
-      #Transparent Proxy configuration
       service sshd stop
-      #echo 1 > /proc/sys/net/ipv4/ip_forward
-      #iptables -t nat -A PREROUTING -p tcp --dport 22 -j DNAT --to-destination $SSH_CLIENT:22
-      #iptables -t nat -A POSTROUTING -p tcp -d $SSH_CLIENT --dport 22 -j SNAT --to-source $HONEYIP
-
-      #Log connections from port 22
-      #iptables -I INPUT -p tcp --dport 22 -m state --state NEW -j LOG --log-level 1 --log-prefix "New Connection >> "
-
-      #Install SSH Honeypot Software
       apk add py3-paramiko
       apk add git
 
@@ -510,7 +503,10 @@ nodes:
 
       iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
 
-      #Change default routes
+      #######################
+      #Change default routes#
+      #######################
+
       ip route del default
       ip route add default via 192.168.1.1 dev eth1 metric 1
       ip route add default via 192.168.0.1 dev eth0 metric 2
