@@ -41,7 +41,8 @@ Note: The steps are only valid if the system already has the correct dependencie
 4. `mv server.key.pub server.pub`                                                 #Renames the public key 
 5. `./ssh_honeypot`                                                               #Initiates the SSH Honeypot in port 2222 by default and locally 
 
-**Optional**
+**Optional:**
+
 Assigning the port 22 requires root privileges and is not recommended to run the program on the root account in order to avoid security issues in case the attacker is able to exploit the software. Therefore the following line of iptables is recommended to redirect the traffic on port 22 to the port 2222. 
 
 6. `iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222`
@@ -59,4 +60,4 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 
 Any additional scripts and configurations should be already configured in the booting script in Alpine Linux systems and downloaded directly from the current github page. Therefore, if the booting scripts are being used instead of a pre-configured KVM Linux image, the simulation needs to have proper NAT and bridge configurations for external internet connection.
 
-**Note: The installation of the ssh_honeypot.py program is automatically installed on the boot script from the .yaml file.**
+**Note: The installation of the ssh_honeypot.py program is automatically installed on the boot script from the .yaml file on the device called honeypot.**
