@@ -61,3 +61,19 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 Any additional scripts and configurations should be already configured in the booting script in Alpine Linux systems and downloaded directly from the current github page. Therefore, if the booting scripts are being used instead of a pre-configured KVM Linux image, the simulation needs to have proper NAT and bridge configurations for external internet connection.
 
 **Note: The installation of the ssh_honeypot.py program is automatically installed on the boot script from the .yaml file on the device called honeypot.**
+
+## Network Tracking on router H-R1
+In order to log all the traffic going inbound and outbound of the Honeypot Network the following commands are needed to filter the packets passing to the WAN.
+
+After booting the router and accessing its command line interface enter the following commands:
+
+1. `monitor capture buffer BF_HONEYNET size 512 max-size 128 circular`
+2. `monitor capture point ip cef CP_HONEYNET gi0/1 both`
+3. `monitor capture point associate CP_HONEYNET BF_HONEYNET`
+4. `monitor capture point start CP_HONEYNET`
+
+The integration of Cisco's Embedded Packet Capture can impact the performance of the edge router connected to the Honeypot Gateway due to the packet filtering and registration of the created buffer, therefore if a bigger network is created it is recommended to distribute the same line of commands between routers connected on different sections of the network. 
+
+In order to verify if the router is filtering the packets the following should be used: `show monitor capture buffer BF_HONEYNET`
+
+Finally, it is recommended to export the buffered packets to an external file sharing server implemented inside the Honeypot Network is proper security (could not be done due to time constraints): `monitor capture buffer BF_HONEYNET export [file sharing server Ipv4 address]`
