@@ -1,5 +1,7 @@
 # Honeypot Project
-This project is a python built SSH Honeypot which proxies the SSH connection depending on the credentials used on the log in prompt.
+This project is a python built SSH Honeypot script built in python which proxies the SSH connection depending on the credentials used on the log in prompt to collect and log brute force attacks and other type of exploitation methods.
+
+To use the script as a virtual honeypot, the project includes a .yaml file with pre-configured scripts and configurations that can be imported and used with Cisco Modelling Labs software.
 
 Disclaimer: Major part of the code used was inspired from the user sjbell from the repository https://github.com/sjbell/basic_ssh_honeypot 
 
@@ -20,14 +22,14 @@ Disclaimer: Major part of the code used was inspired from the user sjbell from t
 `sudo apt install python python-pip python-paramiko`
 
 # Build Dependencies
-`pip install --upgrade pip`
+`pip3 install --upgrade pip`
 
-`pip install --upgrade -r paramiko`
+`pip3 install -r requirements.txt`
 
 Note: Windows and Mac where not tested
 
 # Program Installation
-## Steps to initiate the SSH Honeypot alone
+## Steps to initiate the SSH Honeypot
 
 Note: The steps are only valid if the system already has the correct dependencies installed and all commands were tested on a Linux OS
 
@@ -56,3 +58,5 @@ Assigning the port 22 requires root privileges and is not recommended to run the
 7. Run the simulation
 
 Any additional scripts and configurations should be already configured in the booting script in Alpine Linux systems and downloaded directly from the current github page. Therefore, if the booting scripts are being used instead of a pre-configured KVM Linux image, the simulation needs to have proper NAT and bridge configurations for external internet connection.
+
+**Note: The installation of the ssh_honeypot.py program is automatically installed on the boot script from the .yaml file.**
