@@ -73,10 +73,10 @@ class BasicSshHoneypot(paramiko.ServerInterface):
             logging.info('new client credentials ({}): username: {}, password: {}'.format(self.client_ip, username, password))
 
             #Redirection to Honeypot System
-            local_ip_address = "192.168.0.1"
+            local_ip_address = ""
             local_port = 22
-            local_username = "client"
-            local_password = "client"
+            local_username = ""
+            local_password = ""
 
             return paramiko.AUTH_SUCCESSFUL
         else:
@@ -84,10 +84,10 @@ class BasicSshHoneypot(paramiko.ServerInterface):
             logging.info('new client credentials ({}): username: {}, password: {}'.format(self.client_ip, username, password))
 
             #Redirection to Protected Client
-            local_ip_address = "192.168.2.2"
+            local_ip_address = ""
             local_port = 22
-            local_username = "client"
-            local_password = "client"
+            local_username = ""
+            local_password = ""
 
             return paramiko.AUTH_SUCCESSFUL
 
