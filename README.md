@@ -7,7 +7,7 @@ To use the script as a virtual honeypot, the project includes a .yaml file with 
 
 ## Network Diagram
 
-![Network Diagram](Network_Diagram.pdf)
+![Network Diagram](Network_Diagram.png)
 
 ## Software Requirements
 - VMWare Workstation >16 (Paid License) (or any Virtual Machine software such as VirtualBox, KVM, Windows Hypervisor)
