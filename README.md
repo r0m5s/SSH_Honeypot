@@ -3,7 +3,11 @@ This project is a python built SSH Honeypot script built in python which proxies
 
 To use the script as a virtual honeypot, the project includes a .yaml file with pre-configured scripts and configurations that can be imported and used with Cisco Modelling Labs software.
 
-Disclaimer: Major part of the code used was inspired from the user sjbell from the repository https://github.com/sjbell/basic_ssh_honeypot 
+**Disclaimer**: Major part of the code used was inspired from the user sjbell from the repository https://github.com/sjbell/basic_ssh_honeypot 
+
+## Network Diagram
+
+![Network Diagram](Network_Diagram.pdf)
 
 ## Software Requirements
 - VMWare Workstation >16 (Paid License) (or any Virtual Machine software such as VirtualBox, KVM, Windows Hypervisor)
